@@ -26,7 +26,8 @@ class Sprite {
                 height: 50
         }
         this.color = color
-        this.isAttacking
+        this.isAttacking 
+        this.health = 100
 
     }
 
@@ -129,7 +130,19 @@ function rectangularCollision({rectangle1,rectangle2}) {
     rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height
      )
 }
-
+let timer = 10 
+function decreaserTimer() {
+    if ( timer > 0 ) {
+        setTimeout(decreaserTimer, 1000)
+        timer--
+        document.querySelector('#timer').innerHTML = timer
+    }
+    if ( player.health === enemy.health ) {
+        document.querySelector( '#displayText' ).innnerHTML = 'Tie'
+         document.querySelector('#displayText').style.display = 'flex'
+    }
+}
+decreaserTimer()
 
 function animate() {
     window.requestAnimationFrame( animate );
@@ -164,7 +177,8 @@ function animate() {
         player.isAttacking
     ) {
         player.isAttacking = false
-       document.querySelector('#enemyHealth').style.width='20%'
+        enemy.health -= 20
+       document.querySelector('#enemyHealth').style.width = enemy.health + '%'
     }
 
 
@@ -176,7 +190,8 @@ function animate() {
         enemy.isAttacking
     ) {
         enemy.isAttacking = false
-        console.log( 'enemy attack success' );
+        player.health -= 20
+       document.querySelector('#playerHealth').style.width = player.health + '%'
     }
 }
 animate();
