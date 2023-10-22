@@ -33,8 +33,8 @@ class Sprite {
     draw() {
         c.fillStyle = this.color;
         c.fillRect(this.position.x, this.position.y, 50, this.height);
-        // attack box
-        // if ( this.isAttacking ) {
+         //attack box
+         if ( this.isAttacking ) {
             c.fillStyle = 'green';
             c.fillRect(
                 this.attackBox.position.x,
@@ -44,7 +44,7 @@ class Sprite {
 
         
             )
-        // }
+         }
     }
 
     update() {
@@ -164,7 +164,7 @@ function animate() {
         player.isAttacking
     ) {
         player.isAttacking = false
-        console.log( 'go' );
+       document.querySelector('#enemyHealth').style.width='20%'
     }
 
 
@@ -220,15 +220,16 @@ window.addEventListener( 'keydown', ( event ) => {
 window.addEventListener( 'keyup', ( event ) => {
     switch ( event.key ) {
         case 'd':
-        keys.d.pressed = false 
+            keys.d.pressed = false
             break
         case 'a':
-        keys.a.pressed = false 
+            keys.a.pressed = false
             break
-         case 'w':
+        case 'w':
             keys.a.pressed = false
             lastKey = 'w'
-            break 
+            break
+    }
         //rectangle2 keys 
           switch ( event.key ) {
         case 'ArrowRight':
@@ -242,7 +243,7 @@ window.addEventListener( 'keyup', ( event ) => {
             break 
     }
         
-    }
+    
     console.log(event.key);
 })
 
