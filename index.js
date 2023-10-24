@@ -9,17 +9,68 @@ c.fillRect(0, 0, canvas.width, canvas.height)
 
 const gravity = 0.7
 
-const background = new Sprite( {
+const background_1 = new Sprite( {
     position: {
         x: 0,
         y: 0
     },
     imageSrc: './img/background/background_layer_1.png',
-    size: {
-        width: canvas.width,
-        height: canvas.height
-    }
-})
+    
+} );
+const background_2 = new Sprite( {
+    position: {
+        x: 0,
+        y: 0
+    },
+    imageSrc: './img/background/background_layer_2.png',
+} );
+const background_3 = new Sprite( {
+    position: {
+        x: 0,
+        y: 0
+    },
+    imageSrc: './img/background/background_layer_3.png',
+
+} );
+const fence = new Sprite( {
+    position: {
+        x:0,
+        y: 400
+    },
+    imageSrc: './img/decorations/fence_1.png',
+    scale: 1
+
+} );
+const fence_2 = new Sprite( {
+    position: {
+        x: 300,
+        y: 400
+    },
+    imageSrc: './img/decorations/fence_1.png',
+    scale: 1
+
+} );
+const rock = new Sprite( {
+    position: {
+        x: 910,
+        y: 430
+    },
+    imageSrc: './img/decorations/rock_1.png',
+    scale: 5
+
+} );
+
+
+const shop = new Sprite( {
+    position: {
+        x: 600,
+        y: 128
+    },
+    imageSrc: './img/decorations/shop_anim.png',
+    scale: 2.75,
+    framesMax: 6
+    
+} );
 
 const player = new Fighter({
     position: {
@@ -33,6 +84,13 @@ const player = new Fighter({
     offset: {
         x: 0,
         y:0
+    },
+    imageSrc: './img/MartialHero/Sprites/Idle.png',
+    framesMax: 8,
+    scale: 2.5,
+    offset: {
+        x: 215,
+        y: 157
     }
 });
 
@@ -73,56 +131,23 @@ const keys = {
     
 }
 
-function rectangularCollision({rectangle1,rectangle2}) {
-    return (
-        rectangle1.attackBox.position.x + rectangle1.attackBox.width >=
-        rectangle2.position.x &&
-        rectangle1.attackBox.position.x <=
-        rectangle2.position.x + rectangle2.width && 
-        rectangle1.attackBox.position.y + rectangle1.attackBox.height >=
-        rectangle2.position.y &&
-        rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height
-     )
-}
-function determineWinner( { player, enemy, timerId } ) {
-    clearTimeout(timerId)    
-    const displayText = document.querySelector('#displayText');
-    displayText.style.display = 'flex';
-    
-    if (player.health === enemy.health) {
-        displayText.innerHTML = 'Tie';
-    } else if (player.health > enemy.health) {
-        displayText.innerHTML = 'Player 1 Wins';
-    } else if (player.health < enemy.health) {
-        displayText.innerHTML = 'Player 2 Wins';
-    }
-}
 
-
-let timer = 60
-let timerId 
-function decreaserTimer() {
-    if ( timer > 0 ) {
-        timerId = setTimeout( decreaserTimer, 1000 )
-        timer--
-        document.querySelector( '#timer' ).innerHTML = timer
-    }
-
-    if ( timer === 0 ) {
-       
-         determineWinner({player,enemy, timerId})
-        
-    }
-}
 decreaserTimer()
 
 function animate() {
     window.requestAnimationFrame( animate );
     c.fillStyle = 'black';
     c.fillRect( 0, 0, canvas.width, canvas.height );
-    background.update()
+    background_1.update()
+    background_2.update()
+    background_3.update()
+    fence.update()
+    fence_2.update()
+    rock.update()
+ 
+    shop.update()
     player.update()
-    enemy.update()
+    // enemy.update()
 
     player.velocity.x = 0
     enemy.velocity.x = 0
